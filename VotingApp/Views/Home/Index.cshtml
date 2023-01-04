@@ -2,17 +2,165 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <div class="card text-dark bg-light">
-        <h4 class="card-header fw-bolder">Weather</h4>
-        <div class="card-body">
-            <table class="table table-striped">
-                <tr>
-                    <td>
-                        Test
-                    </td>
-                </tr>
-            </table>
+<div class="row row-cols-1 row-cols-lg-2 g-3 my-2 ">
+    <div class="col">
+        <div class="card text-dark bg-light">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="fw-bolder">Voters</h4>
+                    </div>
+                    <div class="col">
+                        <div class="float-end">
+                            <button type="button" class="btn btn-outline-secondary" 
+                                data-bs-toggle="modal" data-bs-target="#addVoterModal"
+                                data-toggle="tooltip" title="Add Voter">
+                                <img src="~/add.ico" class="img-fluid" height="25" width="25" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th style="width: 20%" scope="col">Has voted</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td>Mark</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Jacob</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Larry the Bird</td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-dark bg-light">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="fw-bolder">Candidates</h4>
+                    </div>
+                    <div class="col">
+                        <div class="float-end">
+                            <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-toggle="modal" data-bs-target="#addCandidateModal"
+                                    data-toggle="tooltip" title="Add Candidate">
+                                <img src="~/add.ico" class="img-fluid" height="25" width="25" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th style="width: 20%" scope="col">Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td>Johnny Bravo</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Pluto</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center card text-dark bg-light mt-5">
+    <h4 class="card-header fw-bolder">Vote!</h4>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>I am</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>I vote for</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Add Voter -->
+<div class="modal fade" id="addVoterModal" tabindex="-1" aria-labelledby="addVoterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addVoterModalLabel">Add Voter</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="input" placeholder="Name">
+                        <label for="input">Name</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add Candidate -->
+<div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addCandidateModalLabel">Add Candidate</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="input" placeholder="Name">
+                        <label for="input">Name</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
