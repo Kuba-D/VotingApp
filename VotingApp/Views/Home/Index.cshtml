@@ -1,8 +1,11 @@
-﻿@{
+﻿@using VotingApp.Models;
+@model IndexViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row row-cols-1 row-cols-lg-2 g-3 my-2 ">
+<div class="row row-cols-1 row-cols-md-2 g-3 my-2 ">
     <div class="col">
         <div class="card text-dark bg-light">
             <div class="card-header">
@@ -30,18 +33,20 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr>
-                            <td>Mark</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>Larry the Bird</td>
-                            <td>Yes</td>
-                        </tr>
+                        @foreach (Voter voter in Model.Voters)
+                        {
+                            <tr>
+                                <td>@voter.Name</td>
+                                @if(voter.VotedCandidate.HasValue)
+                                {
+                                    <td>Yes</td>
+                                }
+                                else
+                                {
+                                    <td>No</td>
+                                }
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -74,43 +79,48 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr>
-                            <td>Johnny Bravo</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>Pluto</td>
-                            <td>5</td>
-                        </tr>
+                        @foreach (Candidate candidate in Model.Candidates)
+                        {
+                            <tr>
+                                <td>@candidate.Name</td>
+                                <td>@candidate.Votes</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="text-center card text-dark bg-light mt-5">
+<div class="text-center card text-dark bg-light mt-3">
     <h4 class="card-header fw-bolder">Vote!</h4>
-    <div class="card-body">
+    <div class="card-body align-middle">
         <form>
             <div class="row">
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>I am</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelectVoter" aria-label="Select Voter">
+                            @foreach (Voter voter in Model.Voters)
+                            {
+                                <option value=@voter.Id>@voter.Name</option>
+                            }
+                        </select>
+                        <label for="floatingSelectVoter">I am</label>
+                    </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>I vote for</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelectCandidate" aria-label="Select Candidate">
+                        @foreach (Candidate candidate in Model.Candidates)
+                        {
+                            <option value=@candidate.Id>@candidate.Name</option>
+                        }
+                        </select>
+                        <label for="floatingSelectCandidate">I vote for</label>
+                    </div>                    
                 </div>
-                <div class="col-2">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                <div class="col-3 col-md-2">
+                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
                 </div>
             </div>
         </form>
