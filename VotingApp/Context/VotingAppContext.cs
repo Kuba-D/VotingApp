@@ -5,6 +5,11 @@ namespace VotingApp.Context
 {
     public class VotingAppContext : DbContext
     {
+        public VotingAppContext(DbContextOptions<VotingAppContext> options)
+            : base(options) 
+        { 
+        }
+
         /// <summary>
         /// DbSet for <see cref="Voter"/>
         /// </summary>

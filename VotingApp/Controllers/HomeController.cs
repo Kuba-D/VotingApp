@@ -1,17 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VotingApp.Models;
+using VotingApp.Services;
 
 namespace VotingApp.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IVoterService _voterService;
+
+        public HomeController(IVoterService voterService)
         {
+            _voterService = voterService;
         }
 
         public IActionResult Index()
         {
+            var votersFromDb = _voterService.GetVoters();
+
             var candidates = new List<Candidate>()
             {
                 new Candidate
