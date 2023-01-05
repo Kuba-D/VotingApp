@@ -6,11 +6,8 @@ namespace VotingApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
         }
 
         public IActionResult Index()
@@ -45,13 +42,13 @@ namespace VotingApp.Controllers
                 {
                     Id = Guid.NewGuid(),
                     Name= "Rumcajs",
-                    VotedCandidate = candidates[1].Id,
+                    VotedCandidateId = candidates[1].Id,
                 },
                 new Voter
                 {
                     Id = Guid.NewGuid(),
                     Name= "Dudel",
-                    VotedCandidate = candidates[1].Id,
+                    VotedCandidateId = candidates[1].Id,
                 },
                 new Voter
                 {
@@ -62,13 +59,13 @@ namespace VotingApp.Controllers
                 {
                     Id = Guid.NewGuid(),
                     Name= "Rumcajs2",
-                    VotedCandidate = candidates[1].Id,
+                    VotedCandidateId = candidates[1].Id,
                 },
                 new Voter
                 {
                     Id = Guid.NewGuid(),
                     Name= "Dudel2",
-                    VotedCandidate = candidates[2].Id,
+                    VotedCandidateId = candidates[2].Id,
                 },
             };
 
@@ -89,11 +86,11 @@ namespace VotingApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private List<Candidate> CalculateVotes(List<Candidate> candidates, List<Voter> voters)
+        private static List<Candidate> CalculateVotes(List<Candidate> candidates, List<Voter> voters)
         {
             foreach(var candidate in candidates)
             {
-                candidate.Votes = voters.Count(voter => voter.VotedCandidate == candidate.Id); 
+                candidate.Votes = voters.Count(voter => voter.VotedCandidateId == candidate.Id); 
             }
 
             return candidates;
