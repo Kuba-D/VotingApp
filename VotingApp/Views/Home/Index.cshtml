@@ -95,11 +95,11 @@
 <div class="text-center card text-dark bg-light mt-3">
     <h4 class="card-header fw-bolder">Vote!</h4>
     <div class="card-body align-middle">
-        <form>
+        <form method="post">
             <div class="row">
                 <div class="col">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectVoter" aria-label="Select Voter">
+                        <select class="form-select" asp-for="SelectedVoter" id="floatingSelectVoter" aria-label="Select Voter">
                             @foreach (Voter voter in Model.Voters)
                             {
                                 <option value=@voter.Id>@voter.Name</option>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectCandidate" aria-label="Select Candidate">
+                        <select class="form-select" asp-for="SelectedCandidate" id="floatingSelectCandidate" aria-label="Select Candidate">
                         @foreach (Candidate candidate in Model.Candidates)
                         {
                             <option value=@candidate.Id>@candidate.Name</option>
@@ -131,14 +131,14 @@
 <div class="modal fade" id="addVoterModal" tabindex="-1" aria-labelledby="addVoterModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form method="post">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addVoterModalLabel">Add Voter</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="input" placeholder="Name">
+                        <input class="form-control" type="text" asp-for="NewVoterName" id="input" placeholder="Name">
                         <label for="input">Name</label>
                     </div>
                 </div>
@@ -155,14 +155,14 @@
 <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form method="post">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addCandidateModalLabel">Add Candidate</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="input" placeholder="Name">
+                        <input class="form-control" type="text" asp-for="NewCandidateName" id="input" placeholder="Name">
                         <label for="input">Name</label>
                     </div>
                 </div>

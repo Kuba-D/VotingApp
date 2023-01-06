@@ -12,6 +12,17 @@ namespace VotingApp.Services
             _voterRepository = voterRepository;
         }
 
+        public Voter CreateVoter(string voterName)
+        {
+            var newVoter = new Voter()
+            {
+                Id = Guid.NewGuid(),
+                Name = voterName,
+            };
+
+            return _voterRepository.CreateVoter(newVoter);
+        }
+
         public IEnumerable<Voter> GetVoters()
         {
             return _voterRepository.GetVoters();

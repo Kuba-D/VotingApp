@@ -14,10 +14,10 @@ namespace VotingApp.Repositories
             _context = context;
         }
 
-        public async Task<Voter> CreateVoterAsync(Voter voter)
+        public Voter CreateVoter(Voter voter)
         {
             _context.Set<Voter>().Add(voter);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return voter;
         }
 

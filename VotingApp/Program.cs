@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IVoterRepository,VoterRepository>();
+builder.Services.AddScoped<ICandidateRepository,CandidateRepository>();
 builder.Services.AddScoped<IVoterService, VoterService>();
+builder.Services.AddScoped<ICandidateService, CandidateService>();
 
 RegisterDbContext(builder);
 

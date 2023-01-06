@@ -4,7 +4,7 @@ namespace VotingApp.Repositories
 {
     public interface IVoterRepository
     {
-        public Task<Voter> CreateVoterAsync(Voter voter);
+        public Voter CreateVoter(Voter voter);
 
         public Task<Voter> UpdateVoterAsync(Voter voter);
 
