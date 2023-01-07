@@ -6,8 +6,8 @@ namespace VotingApp.Repositories
     {
         public Candidate CreateCandidate(Candidate candidate);
 
-        public Candidate UpdateCandidate(Candidate candidate);
-
         public List<Candidate> GetCandidates();
+
+        public Candidate? GetCandidateById(Guid id);
     }
 }

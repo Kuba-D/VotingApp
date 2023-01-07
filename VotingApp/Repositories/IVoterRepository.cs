@@ -6,8 +6,10 @@ namespace VotingApp.Repositories
     {
         public Voter CreateVoter(Voter voter);
 
-        public Task<Voter> UpdateVoterAsync(Voter voter);
+        public Voter UpdateVoter(Voter voter);
 
         public List<Voter> GetVoters();
+
+        public Voter? GetVoterById(Guid id);
     }
 }

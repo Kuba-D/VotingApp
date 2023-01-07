@@ -7,5 +7,7 @@ namespace VotingApp.Services
         public Voter CreateVoter(string voterName);
 
         public IEnumerable<Voter> GetVoters();
+
+        public Voter AddVoteToVoter(Guid voterId, Guid candidateId);
     }
 }

@@ -25,11 +25,13 @@ namespace VotingApp.Repositories
             return _context.Candidates.ToList();
         }
 
-        public Candidate UpdateCandidate(Candidate candidate)
+        public Candidate? GetCandidateById(Guid id)
         {
-            _context.Set<Candidate>().Update(candidate);
-            _context.SaveChanges();
-            return candidate;
+            var voter = _context.Candidates
+                .Where(voter => voter.Id == id)
+                .FirstOrDefault();
+            return voter;
         }
+
     }
 }

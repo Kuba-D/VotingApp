@@ -21,16 +21,24 @@ namespace VotingApp.Repositories
             return voter;
         }
 
-        public async Task<Voter> UpdateVoterAsync(Voter voter)
+        public Voter UpdateVoter(Voter voter)
         {
             _context.Set<Voter>().Update(voter);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return voter;
         }
 
         public List<Voter> GetVoters()
         {
             return _context.Voters.ToList();
+        }
+
+        public Voter? GetVoterById(Guid id)
+        {
+            var voter = _context.Voters
+                .Where(voter => voter.Id == id)
+                .FirstOrDefault();
+            return voter;
         }
     }
 }
