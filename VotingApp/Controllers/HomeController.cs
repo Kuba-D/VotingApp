@@ -22,12 +22,10 @@ namespace VotingApp.Controllers
             var votersFromDb = _voterService.GetVoters().ToList();
             var candidatesFromDb = _candidateService.GetCandidates().ToList();
 
-            candidatesFromDb = CalculateVotes(candidatesFromDb);
-
             var indexViewModel = new IndexViewModel()
             {
                 Voters = votersFromDb,
-                Candidates = candidatesFromDb,
+                Candidates = CalculateVotes(candidatesFromDb),
             };
 
             return View(indexViewModel);
@@ -36,24 +34,24 @@ namespace VotingApp.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel indexViewModel)
         {
-            var createVoter = indexViewModel.NewVoterName != string.Empty;
-            var createCandidate = indexViewModel.NewCandidateName != string.Empty;
+            var createVoter = indexViewModel.NewVoterName != null;
+            var createCandidate = indexViewModel.NewCandidateName != null;
             var voting = indexViewModel.SelectedVoter != null && indexViewModel.SelectedCandidate != null;
 
             if (createVoter && !createCandidate && !voting)
             {
-                _voterService.CreateVoter(indexViewModel.NewVoterName);
+                _voterService.CreateVoter(indexViewModel.NewVoterName!);
             }
             else if (createCandidate && !createVoter && !voting)
             {
-                _candidateService.CreateCandidate(indexViewModel.NewCandidateName);
+                _candidateService.CreateCandidate(indexViewModel.NewCandidateName!);
             }
             else if (voting && !createVoter && !createCandidate)
             {
                 _voterService.AddVoteToVoter((Guid)indexViewModel.SelectedVoter!, (Guid)indexViewModel.SelectedCandidate!);
             }
 
-            return Index();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -66,7 +64,7 @@ namespace VotingApp.Controllers
         {
             foreach (var candidate in candidates.Where(candidate => candidate.Voters != null))
             {                    
-                candidate.Votes = candidate.Voters!.Count();
+                candidate.Votes = candidate.Voters!.Count;
             }
 
             return candidates;

@@ -1,10 +1,6 @@
 ﻿@using VotingApp.Models;
 @model IndexViewModel;
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-
 <div class="row row-cols-1 row-cols-md-2 g-3 my-2 ">
     <div class="col">
         <div class="card text-dark bg-light">
@@ -28,8 +24,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-@*                            <th style="width: 10%" scope="col">Delete</th>
-*@                            <th scope="col">Name</th>
+                            <th scope="col">Name</th>
                             <th style="width: 20%" scope="col">Has voted</th>
                         </tr>
                     </thead>
@@ -37,19 +32,14 @@
                         @foreach (Voter voter in Model.Voters)
                         {
                             <tr>
-@*                                <td>
-                                    <button type="button" class="btn btn-sm">
-                                        <img src="~/trash-can.svg" class="img-fluid" height="5" width="15"/>
-                                    </button>
-                                </td>*@
                                 <td>@voter.Name</td>
                                 @if(voter.VotedCandidateId.HasValue)
                                 {
-                                    <td>Yes</td>
+                                    <td class="text-success">Yes</td>
                                 }
                                 else
                                 {
-                                    <td>No</td>
+                                    <td class="text-danger">No</td>
                                 }
                             </tr>
                         }
@@ -168,7 +158,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" asp-for="NewCandidateName" id="input" placeholder="Name">
+                        <input class="form-control" type="text" asp-for="NewCandidateName" id="input" placeholder="Name" value="">
                         <label for="input">Name</label>
                     </div>
                 </div>

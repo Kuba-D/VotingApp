@@ -8,9 +8,9 @@ namespace VotingApp.Models
 
         public IEnumerable<Candidate> Candidates { get; set; } = new List<Candidate>();
 
-        public string NewVoterName { get; set; } = string.Empty;
+        public string? NewVoterName { get; set; }
 
-        public string NewCandidateName { get; set; } = string.Empty;
+        public string? NewCandidateName { get; set; }
 
         public Guid? SelectedVoter { get; set; }
 
