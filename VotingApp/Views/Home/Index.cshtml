@@ -38,11 +38,11 @@
                                 <td>@voter.Name</td>
                                 @if(voter.VotedCandidateId.HasValue)
                                 {
-                                    <td class="text-success text-center">Yes</td>
+                                    <td class="text-success text-center fw-bold">Yes</td>
                                 }
                                 else
                                 {
-                                    <td class="text-danger text-center">No</td>
+                                    <td class="text-danger text-center fw-bold">No</td>
                                 }
                             </tr>
                             voterIndex++;

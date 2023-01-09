@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VotingApp.Models
 {
@@ -16,13 +17,28 @@ namespace VotingApp.Models
         public string Name { get; set; } = string.Empty;
         
         /// <summary>
-        /// Number of Votes for Candidate.
-        /// </summary>
-        public int Votes { get; set; }
-
-        /// <summary>
         /// Relationship between Candidate and its Voters.
         /// </summary>
         public virtual ICollection<Voter>? Voters { get; set; }
+
+        /// <summary>
+        /// Number of Votes for Candidate.
+        /// </summary>
+        [NotMapped]
+        public int Votes
+        { 
+            get
+            {
+                if(Voters != null)
+                {
+                    return Voters.Count;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+        }
     }
 }

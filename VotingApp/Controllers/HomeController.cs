@@ -24,7 +24,7 @@ namespace VotingApp.Controllers
             var indexViewModel = new IndexViewModel()
             {
                 Voters = votersFromDb,
-                Candidates = CalculateVotes(candidatesFromDb),
+                Candidates = candidatesFromDb,
             };
 
             return View(indexViewModel);
@@ -57,16 +57,6 @@ namespace VotingApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private static List<Candidate> CalculateVotes(List<Candidate> candidates)
-        {
-            foreach (var candidate in candidates.Where(candidate => candidate.Voters != null))
-            {                    
-                candidate.Votes = candidate.Voters!.Count;
-            }
-
-            return candidates;
         }
     }
 }
