@@ -9,11 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IVoterRepository,VoterRepository>();
-builder.Services.AddScoped<ICandidateRepository,CandidateRepository>();
+// Register Services
 builder.Services.AddScoped<IVoterService, VoterService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 
+// Register Repositories
+builder.Services.AddScoped<IVoterRepository,VoterRepository>();
+builder.Services.AddScoped<ICandidateRepository,CandidateRepository>();
+
+// Register SQL Lite Database
 RegisterDbContext(builder);
 
 var app = builder.Build();
@@ -41,10 +45,9 @@ app.Run();
 
 static void RegisterDbContext(WebApplicationBuilder builder)
 {
-    builder.Services.Configure<ConnectionStringOptions>(builder.Configuration.GetSection(ConnectionStringOptions.ConnectionStrings));
     var connectionStringOptions = new ConnectionStringOptions();
     builder.Configuration.GetSection(ConnectionStringOptions.ConnectionStrings).Bind(connectionStringOptions);
 
     var connectionString = connectionStringOptions.ServiceDatabase;
-    builder.Services.AddDbContext<VotingAppContext>(options => options.UseSqlite(@"Data Source=.\VotingAppDb.db"));
+    builder.Services.AddDbContext<VotingAppContext>(options => options.UseSqlite(connectionString));
 }
