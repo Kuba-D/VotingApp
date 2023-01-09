@@ -1,7 +1,7 @@
 ﻿@using VotingApp.Models;
 @model IndexViewModel;
 
-<div class="row row-cols-1 row-cols-md-2 g-3 my-2 ">
+<div class="row row-cols-1 row-cols-lg-2 g-3 my-2 ">
     <div class="col">
         <div class="card text-dark bg-light">
             <div class="card-header">
@@ -24,24 +24,28 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col" style="width: 5%">#</th>
                             <th scope="col">Name</th>
-                            <th style="width: 20%" scope="col">Has voted</th>
+                            <th scope="col" class="text-center" style="width: 25%">Has voted</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
+                        @{int voterIndex = 1;}
                         @foreach (Voter voter in Model.Voters)
                         {
                             <tr>
+                                <td>@voterIndex.</td>
                                 <td>@voter.Name</td>
                                 @if(voter.VotedCandidateId.HasValue)
                                 {
-                                    <td class="text-success">Yes</td>
+                                    <td class="text-success text-center">Yes</td>
                                 }
                                 else
                                 {
-                                    <td class="text-danger">No</td>
+                                    <td class="text-danger text-center">No</td>
                                 }
                             </tr>
+                            voterIndex++;
                         }
                     </tbody>
                 </table>
@@ -70,17 +74,21 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col" style="width: 5%">#</th>
                             <th scope="col">Name</th>
-                            <th style="width: 20%" scope="col">Votes</th>
+                            <th scope="col" class="text-center" style="width: 20%">Votes</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
+                        @{int candidateIndex = 1;}
                         @foreach (Candidate candidate in Model.Candidates)
                         {
                             <tr>
+                                <td>@candidateIndex.</td>
                                 <td>@candidate.Name</td>
-                                <td>@candidate.Votes</td>
+                                <td class="text-center">@candidate.Votes</td>
                             </tr>
+                            candidateIndex++;
                         }
                     </tbody>
                 </table>
